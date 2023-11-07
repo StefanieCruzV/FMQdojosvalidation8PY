@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  <title>Dojo Survey</title>
+</head>
+
+<body>
+  <form class="w-50 mx-auto d-block my-3 p-3 border bg-dark bg-opacity-75 text-white" action="/result" method="post">
+    <h1 class="text-warning">Dojo Survey</h1>
+    {% with messages = get_flashed_messages() %}<!-- declare a variable called messages -->
+      {% if messages %}                         <!-- check if there are any messages -->
+        {% for message in messages %}           <!-- loop through the messages -->
+          <p>{{message}}</p>                    <!-- display each message in a paragraph tag -->
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Name</label>
+      <input name="name" type="text" class="form-control" />
+    </div>
+    <label class="form-label">Dojo Locations </label>
+    <select name="dojo_locsation" class="form-select">
+      <option value=""></option>
+      {% for user in users %}
+      <option value="{{user.dojo_locsation}}">{{user.dojo_locsation}}</option>
+      {% endfor %}
+    </select>
+    <label class="form-label">Favorite Lenguaje</label>
+    <select name="favorite_lenguage" class="form-select" aria-label="Default select example">
+      <option value=""></option>
+      {% for user in users %}
+      <option value="{{user.favorite_lenguage}}">{{user.favorite_lenguage}}</option>
+      {% endfor %}
+    </select>
+
+    <div class="mb-3">
+      <label class="form-label">Comments</label>
+      <textarea name="comments" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <div class="form-check">
+        <!-- <input class="form-check-input" type="checkbox" name="submit" value="true"> -->
+        <!-- <label class="form-check-label" for="flexCheckDefault">
+            Do you want to recive info about courses
+          </label> -->
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</body>
+
+</html>
